@@ -4,16 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>StreamFlix - Premium IPTV Experience</title>
+
     <link rel="stylesheet" href="css/netflix-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
     <link rel="manifest" href="manifest.webmanifest">
+
     <meta name="theme-color" content="#e50914">
-    <meta name="streamflix-relay-base" content="https://github.com/Live-Lox-TV/Live-Lox-TV/raw/main/playlist.m3u">
+
+    <!-- Relay base should be relay/proxy URL, NOT playlist URL -->
+    <meta name="streamflix-relay-base" content="https://streamflix-relay.chrizmonsaji.workers.dev">
+
+    <!-- Optional custom playlist URLs -->
+    <meta name="streamflix-playlist-global" content="https://raw.githubusercontent.com/Live-Lox-TV/Live-Lox-TV/main/playlist.m3u">
+    <meta name="streamflix-playlist-india" content="https://raw.githubusercontent.com/Live-Lox-TV/Live-Lox-TV/main/playlist.m3u">
 </head>
 <body class="homepage">
     <!-- Netflix-Style Splash Screen -->
@@ -39,6 +48,7 @@
                     <i class="fas fa-bars"></i>
                 </button>
                 <h1 class="brand-logo"><i class="fas fa-play-circle"></i> StreamFlix</h1>
+
                 <nav class="nav-links">
                     <a href="#" class="active">Home</a>
                     <a href="#popular-channels">TV Shows</a>
@@ -46,6 +56,7 @@
                     <a href="./download.html" data-web-only>Downloads</a>
                 </nav>
             </div>
+
             <div class="nav-right">
                 <div class="playlist-toggle">
                     <label for="home-playlist-select">Playlist</label>
@@ -55,6 +66,7 @@
                     </select>
                     <span class="playlist-badge">Recommended</span>
                 </div>
+
                 <button class="nav-pill" id="browse-channels-top">
                     <i class="fas fa-th-large"></i> Browse
                 </button>
@@ -62,6 +74,7 @@
         </header>
 
         <div id="home-sidebar-overlay" class="home-sidebar-overlay"></div>
+
         <aside id="home-sidebar" class="home-sidebar">
             <div class="home-sidebar-header">
                 <h2><i class="fas fa-play-circle"></i> StreamFlix</h2>
@@ -69,6 +82,7 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
+
             <nav class="home-sidebar-nav">
                 <a href="./index.html"><i class="fas fa-house"></i> Home</a>
                 <a href="./player.html"><i class="fas fa-tv"></i> Player</a>
@@ -81,19 +95,22 @@
             </nav>
         </aside>
 
-        <!-- Hero Section with Featured Content -->
+        <!-- Hero Section -->
         <section class="hero-showcase">
             <div class="featured-showcase">
                 <div class="showcase-content">
                     <h1 class="showcase-title">Premium Live Streaming</h1>
                     <p class="showcase-description">Experience thousands of live channels with crystal clear quality</p>
+
                     <div class="showcase-actions">
                         <button id="watch-now" class="btn-primary">
                             <i class="fas fa-play"></i> Start Watching
                         </button>
+
                         <button id="browse-channels" class="btn-secondary">
                             <i class="fas fa-th-large"></i> Browse Channels
                         </button>
+
                         <button id="play-custom-url" class="btn-secondary" style="margin-left: 10px; background: rgba(109, 109, 110, 0.7);">
                             <i class="fas fa-link"></i> Play URL
                         </button>
@@ -102,19 +119,20 @@
             </div>
         </section>
 
-        <!-- Netflix-Style Row Sections -->
+        <!-- Content Rows -->
         <section class="content-rows">
-            <!-- Continue Watching Row -->
+            <!-- Continue Watching -->
             <div class="row-section">
                 <div class="row-header">
                     <h2 class="row-title">Continue Watching</h2>
-                    <button class="row-arrow prev">
+                    <button class="row-arrow prev" type="button">
                         <i class="fas fa-chevron-left"></i>
                     </button>
-                    <button class="row-arrow next">
+                    <button class="row-arrow next" type="button">
                         <i class="fas fa-chevron-right"></i>
                     </button>
                 </div>
+
                 <div class="row-content" id="continue-watching">
                     <div class="loading-placeholder">
                         <div class="placeholder-card"></div>
@@ -126,17 +144,18 @@
                 </div>
             </div>
 
-            <!-- Popular Channels Row -->
+            <!-- Popular Channels -->
             <div class="row-section">
                 <div class="row-header">
                     <h2 class="row-title">Popular Channels</h2>
-                    <button class="row-arrow prev">
+                    <button class="row-arrow prev" type="button">
                         <i class="fas fa-chevron-left"></i>
                     </button>
-                    <button class="row-arrow next">
+                    <button class="row-arrow next" type="button">
                         <i class="fas fa-chevron-right"></i>
                     </button>
                 </div>
+
                 <div class="row-content" id="popular-channels">
                     <div class="loading-placeholder">
                         <div class="placeholder-card"></div>
@@ -148,9 +167,10 @@
                 </div>
             </div>
 
-            <!-- Categories Showcase -->
+            <!-- Categories -->
             <div class="categories-showcase">
                 <h2 class="section-title">Browse by Category</h2>
+
                 <div class="category-grid" id="category-showcase">
                     <div class="category-card" data-category="news">
                         <div class="category-image news-bg"></div>
@@ -159,6 +179,7 @@
                             <p>Stay updated with live news and sports</p>
                         </div>
                     </div>
+
                     <div class="category-card" data-category="entertainment">
                         <div class="category-image entertainment-bg"></div>
                         <div class="category-overlay">
@@ -166,6 +187,7 @@
                             <p>Movies, series, and entertainment channels</p>
                         </div>
                     </div>
+
                     <div class="category-card" data-category="music">
                         <div class="category-image music-bg"></div>
                         <div class="category-overlay">
@@ -173,6 +195,7 @@
                             <p>Music channels from around the world</p>
                         </div>
                     </div>
+
                     <div class="category-card" data-category="kids">
                         <div class="category-image kids-bg"></div>
                         <div class="category-overlay">
@@ -183,16 +206,17 @@
                 </div>
             </div>
 
-            <!-- All Channels Grid -->
+            <!-- All Channels -->
             <div class="all-channels-section">
                 <div class="section-header">
                     <h2>All Channels</h2>
+
                     <div class="search-container">
                         <input type="text" id="search-input" placeholder="Search channels...">
                         <i class="fas fa-search"></i>
                     </div>
                 </div>
-                
+
                 <div class="channels-grid" id="all-channels">
                     <div class="loading-placeholder">
                         <div class="placeholder-card"></div>
@@ -203,8 +227,9 @@
                         <div class="placeholder-card"></div>
                     </div>
                 </div>
+
                 <div class="load-more-wrap">
-                    <button id="load-more-home" class="load-more-btn">Load More Channels</button>
+                    <button id="load-more-home" class="load-more-btn" type="button">Load More Channels</button>
                 </div>
             </div>
         </section>
@@ -218,6 +243,7 @@
                 <p>Netflix-style IPTV web player for live channel streaming.</p>
                 <p>Released: 2026</p>
             </div>
+
             <div class="developer-credits">
                 <p>Developer: <a href="https://github.com/chriz-3656" target="_blank" rel="noopener noreferrer">@chriz-3656</a></p>
                 <p>Email: <a href="mailto:chrizmonsaji@proton.me">chrizmonsaji@proton.me</a></p>
@@ -227,6 +253,16 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        window.STREAMFLIX_CONFIG = {
+            relayBase: "https://streamflix-relay.chrizmonsaji.workers.dev",
+            playlists: {
+                global: "https://raw.githubusercontent.com/Live-Lox-TV/Live-Lox-TV/main/playlist.m3u",
+                india: "https://raw.githubusercontent.com/Live-Lox-TV/Live-Lox-TV/main/playlist.m3u"
+            }
+        };
+    </script>
 
     <script src="js/pwa-register.js"></script>
     <script src="js/homepage.js"></script>
