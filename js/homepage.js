@@ -19,8 +19,8 @@ class StreamFlixHomepage {
         this.maxStatusProbeWorkers = 4;
         this.relayProbeBase = this.resolveRelayProbeBase();
         this.playlists = {
-            global: 'https://iptv-org.github.io/iptv/index.m3u',
-            india: 'https://iptv-org.github.io/iptv/countries/in.m3u'
+            global: 'https://github.com/Live-Lox-TV/Live-Lox-TV/raw/main/playlist.m3u',
+            india: 'https://github.com/Live-Lox-TV/Live-Lox-TV/raw/main/playlist.m3u'
         };
         this.selectedPlaylist = localStorage.getItem('streamflix-preferred-playlist') || 'global';
         
