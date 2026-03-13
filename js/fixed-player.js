@@ -6,8 +6,8 @@ class StreamFlixPlayer {
         this.isPlaying = false;
         this.isMuted = false;
         this.playlists = {
-            india: 'https://github.com/Live-Lox-TV/Live-Lox-TV/raw/main/playlist.m3u',
-            global: 'https://github.com/Live-Lox-TV/Live-Lox-TV/raw/main/playlist.m3u'
+            india: 'https://raw.githubusercontent.com/Live-Lox-TV/Live-Lox-TV/main/playlist.m3u',
+            global: 'https://raw.githubusercontent.com/Live-Lox-TV/Live-Lox-TV/main/playlist.m3u'
         };
         
         this.initializeElements();
@@ -104,7 +104,8 @@ class StreamFlixPlayer {
     async loadPlaylist(type) {
         try {
             this.showLoading(true);
-            const response = await fetch(this.playlists[type]);
+            const playlistUrl = this.playlists[type] || this.playlists.global;
+            const response = await fetch(playlistUrl);
             const playlistText = await response.text();
             this.parsePlaylist(playlistText);
             this.renderChannelGrid();
@@ -145,8 +146,7 @@ class StreamFlixPlayer {
     }
 
     isValidStreamUrl(url) {
-        const validExtensions = ['.m3u8', '.mp4', '.ts', '.webm'];
-        return validExtensions.some(ext => url.includes(ext)) || url.includes('live') || url.includes('stream');
+        return /^https?:\/\//i.test(url);
     }
 
     parseChannelMetadata(line) {
