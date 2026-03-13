@@ -18,9 +18,9 @@ class StreamFlixHomepage {
         this.statusProbeWorkers = 0;
         this.maxStatusProbeWorkers = 4;
         this.relayProbeBase = this.resolveRelayProbeBase();
-        this.playlists = {
-            global: 'https://github.com/Live-Lox-TV/Live-Lox-TV/raw/main/playlist.m3u',
-            india: 'https://github.com/Live-Lox-TV/Live-Lox-TV/raw/main/playlist.m3u'
+        this.playlists = (window.STREAMFLIX_CONFIG && window.STREAMFLIX_CONFIG.playlists) || {
+            global: 'https://raw.githubusercontent.com/Live-Lox-TV/Live-Lox-TV/main/playlist.m3u',
+            india: 'https://raw.githubusercontent.com/Live-Lox-TV/Live-Lox-TV/main/playlist.m3u'
         };
         this.selectedPlaylist = localStorage.getItem('streamflix-preferred-playlist') || 'global';
         
@@ -228,13 +228,7 @@ class StreamFlixHomepage {
     }
 
     isValidStreamUrl(url) {
-        return url && (
-            url.includes('.m3u8') || 
-            url.includes('.mp4') || 
-            url.includes('.ts') ||
-            url.includes('youtube.com') ||
-            url.includes('youtu.be')
-        );
+        return /^https?:\/\//i.test(url);
     }
 
     processChannels() {
