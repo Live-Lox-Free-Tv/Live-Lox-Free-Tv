@@ -33,8 +33,8 @@ class NetflixIPTVPlayer {
         this.defaultPlaylistType = this.resolveDefaultPlaylistType();
         this.activePlaylistType = this.defaultPlaylistType;
         this.playlists = {
-            india: 'https://iptv-org.github.io/iptv/countries/in.m3u',
-            global: 'https://iptv-org.github.io/iptv/index.m3u'
+            india: 'https://github.com/Live-Lox-TV/Live-Lox-TV/raw/main/playlist.m3u',
+            global: 'https://github.com/Live-Lox-TV/Live-Lox-TV/raw/main/playlist.m3u'
         };
         
         this.initializeElements();
