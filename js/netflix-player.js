@@ -33,8 +33,8 @@ class NetflixIPTVPlayer {
         this.defaultPlaylistType = this.resolveDefaultPlaylistType();
         this.activePlaylistType = this.defaultPlaylistType;
         this.playlists = {
-            india: 'https://github.com/Live-Lox-TV/Live-Lox-TV/raw/main/playlist.m3u',
-            global: 'https://github.com/Live-Lox-TV/Live-Lox-TV/raw/main/playlist.m3u'
+            india: 'https://raw.githubusercontent.com/Live-Lox-TV/Live-Lox-TV/main/playlist.m3u',
+            global: 'https://raw.githubusercontent.com/Live-Lox-TV/Live-Lox-TV/main/playlist.m3u'
         };
         
         this.initializeElements();
@@ -53,7 +53,7 @@ class NetflixIPTVPlayer {
             // Check for channel parameter in URL
             this.checkUrlParameters();
         } else {
-            console.log('⚠️ Essential player elements not found - skipping player initialization');
+            console.log('тЪая╕П Essential player elements not found - skipping player initialization');
         }
     }
 
@@ -83,10 +83,10 @@ class NetflixIPTVPlayer {
                 group: channelGroup,
                 logo: channelLogo
             };
-            console.log('🎯 Channel request found in URL params:', this.pendingRequestedChannel);
+            console.log('ЁЯОп Channel request found in URL params:', this.pendingRequestedChannel);
             this.applyPendingRequestedChannel();
         } else {
-            console.log('ℹ️ No channel parameter in URL');
+            console.log('тД╣я╕П No channel parameter in URL');
         }
     }
 
@@ -108,7 +108,7 @@ class NetflixIPTVPlayer {
         }
 
         if (targetIndex !== -1) {
-            console.log(`🎬 Playing requested channel: ${this.channels[targetIndex].name}`);
+            console.log(`ЁЯОм Playing requested channel: ${this.channels[targetIndex].name}`);
             this.currentChannelIndex = targetIndex;
             this.selectChannel(targetIndex);
             this.renderPlayerChannelList(this.filteredChannels);
@@ -125,7 +125,7 @@ class NetflixIPTVPlayer {
                 resolution: 'LIVE',
                 url: streamUrl
             };
-            console.log('⚠️ Requested channel not found in parsed list, using direct stream fallback');
+            console.log('тЪая╕П Requested channel not found in parsed list, using direct stream fallback');
             this.currentChannelIndex = -1;
             this.updateChannelInfo(fallbackChannel);
             this.updateSidebarInfo(fallbackChannel);
@@ -210,7 +210,7 @@ class NetflixIPTVPlayer {
         }
 
         // Debug logging
-        console.log('🔍 Element initialization results:');
+        console.log('ЁЯФН Element initialization results:');
         console.log('- Video player:', !!this.videoPlayer);
         console.log('- Sidebar:', !!this.sidebar);
         console.log('- Toggle sidebar btn:', !!this.toggleSidebarBtn);
@@ -367,14 +367,14 @@ class NetflixIPTVPlayer {
 
     renderPlayerChannelList(channels = this.filteredChannels) {
         if (!this.playerChannelList) {
-            console.log('ℹ️ No player channel list element found');
+            console.log('тД╣я╕П No player channel list element found');
             return;
         }
 
         this.sidebarChannelsView = channels;
         const visibleChannels = channels.slice(0, this.sidebarVisibleCount || channels.length);
 
-        console.log(`📺 Rendering ${visibleChannels.length}/${channels.length} channels to player sidebar`);
+        console.log(`ЁЯУ║ Rendering ${visibleChannels.length}/${channels.length} channels to player sidebar`);
         this.playerChannelList.innerHTML = '';
 
         if (this.channelCount) {
@@ -534,24 +534,24 @@ class NetflixIPTVPlayer {
             if (this.playlistSelect) {
                 this.playlistSelect.value = selectedType;
             }
-            console.log(`📡 Loading ${selectedType} playlist...`);
+            console.log(`ЁЯУб Loading ${selectedType} playlist...`);
             this.showLoading(true);
             
             const url = this.playlists[selectedType];
-            console.log(`🔗 Fetching from: ${url}`);
+            console.log(`ЁЯФЧ Fetching from: ${url}`);
             
             const response = await fetch(url);
-            console.log(`✅ Response status: ${response.status}`);
+            console.log(`тЬЕ Response status: ${response.status}`);
             
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             
             const playlistText = await response.text();
-            console.log(`📄 Received ${playlistText.length} bytes`);
+            console.log(`ЁЯУД Received ${playlistText.length} bytes`);
             
             this.parsePlaylist(playlistText);
-            console.log(`🎯 Parsed ${this.channels.length} channels`);
+            console.log(`ЁЯОп Parsed ${this.channels.length} channels`);
             const searchTerm = this.sidebarSearch ? this.sidebarSearch.value : this.sidebarSearchTerm;
             this.filterPlayerChannels(searchTerm || '');
             this.applyPendingRequestedChannel();
@@ -561,9 +561,9 @@ class NetflixIPTVPlayer {
             this.populateCategories();
             this.showLoading(false);
             
-            console.log(`✅ Playlist loaded successfully!`);
+            console.log(`тЬЕ Playlist loaded successfully!`);
         } catch (error) {
-            console.error('❌ Error loading playlist:', error);
+            console.error('тЭМ Error loading playlist:', error);
             this.showLoading(false);
             this.showError(`Failed to load playlist: ${error.message}`);
         }
@@ -591,7 +591,7 @@ class NetflixIPTVPlayer {
     }
 
     parsePlaylist(playlistText) {
-        console.log('🔍 Parsing M3U playlist...');
+        console.log('ЁЯФН Parsing M3U playlist...');
         const lines = playlistText.split('\n');
         this.channels = [];
         let currentChannel = null;
@@ -617,21 +617,16 @@ class NetflixIPTVPlayer {
         }
         
         this.filteredChannels = [...this.channels];
-        console.log(`✅ Parsed ${this.channels.length} valid channels`);
+        console.log(`тЬЕ Parsed ${this.channels.length} valid channels`);
         
         if (this.channels.length === 0) {
-            console.warn('⚠️ No channels found in playlist!');
+            console.warn('тЪая╕П No channels found in playlist!');
             this.showError('No channels found in playlist');
         }
     }
 
     isValidStreamUrl(url) {
-        // Basic validation for stream URLs
-        const validExtensions = ['.m3u8', '.mp4', '.ts', '.webm'];
-        return validExtensions.some(ext => url.includes(ext)) || 
-               url.includes('live') || 
-               url.includes('stream') ||
-               this.isYoutubeUrl(url);
+        return /^https?:\/\//i.test(url);
     }
 
     isYoutubeUrl(url) {
@@ -677,11 +672,11 @@ class NetflixIPTVPlayer {
     }
 
     renderChannelGrid(channels = this.filteredChannels) {
-        console.log(`🎨 Rendering ${channels.length} channels to grid`);
+        console.log(`ЁЯОи Rendering ${channels.length} channels to grid`);
         
         // Only render if channel list element exists (homepage only)
         if (!this.channelList) {
-            console.log('ℹ️ No channel list element found - skipping grid render');
+            console.log('тД╣я╕П No channel list element found - skipping grid render');
             return;
         }
         
@@ -695,7 +690,7 @@ class NetflixIPTVPlayer {
                     <p>Try adjusting your search or filter criteria</p>
                 </div>
             `;
-            console.warn('⚠️ No channels to render');
+            console.warn('тЪая╕П No channels to render');
             return;
         }
 
@@ -705,7 +700,7 @@ class NetflixIPTVPlayer {
         });
         this.queueVisibleChannelStatusChecks(channels);
         
-        console.log(`✅ Successfully rendered ${channels.length} channel cards`);
+        console.log(`тЬЕ Successfully rendered ${channels.length} channel cards`);
     }
 
     createChannelCard(channel, displayIndex) {
@@ -750,7 +745,7 @@ class NetflixIPTVPlayer {
 
     populateCategories() {
         if (!this.categoryFilter) {
-            console.log('ℹ️ No category filter element found - skipping category population');
+            console.log('тД╣я╕П No category filter element found - skipping category population');
             return;
         }
 
@@ -809,7 +804,7 @@ class NetflixIPTVPlayer {
 
     updateSidebarInfo(channel) {
         this.sidebarChannelName.textContent = channel.name;
-        this.sidebarChannelInfo.textContent = `${channel.group} • ${channel.resolution}`;
+        this.sidebarChannelInfo.textContent = `${channel.group} тАв ${channel.resolution}`;
         
         if (channel.logo) {
             this.sidebarChannelLogo.src = channel.logo;
@@ -1495,7 +1490,7 @@ class NetflixIPTVPlayer {
 
     toggleSidebar(forceOpen = null) {
         if (!this.sidebar) {
-            console.error('❌ Sidebar element not found');
+            console.error('тЭМ Sidebar element not found');
             return;
         }
 
@@ -1666,7 +1661,7 @@ class NetflixIPTVPlayer {
         const url = prompt('Enter a stream URL (YouTube, m3u8, mp4, etc.):');
         if (url && url.trim()) {
             const cleanUrl = url.trim();
-            console.log('🔗 Playing custom URL:', cleanUrl);
+            console.log('ЁЯФЧ Playing custom URL:', cleanUrl);
             
             const customChannel = {
                 name: 'Custom Stream',
@@ -1809,7 +1804,7 @@ class NetflixIPTVPlayer {
 
 // Function to safely initialize player
 function initializeStreamFlixPlayer() {
-    console.log('🔍 Checking if player should be initialized...');
+    console.log('ЁЯФН Checking if player should be initialized...');
     
     // Multiple checks to ensure we're on the right page
     const videoPlayer = document.getElementById('video-player');
@@ -1822,23 +1817,23 @@ function initializeStreamFlixPlayer() {
     
     // Only initialize if we're definitely on the player page
     if (videoPlayer && (playerPage || playerContainer)) {
-        console.log('🎬 StreamFlix Player Initializing...');
+        console.log('ЁЯОм StreamFlix Player Initializing...');
         try {
             window.netflixPlayer = new NetflixIPTVPlayer();
-            console.log('✅ StreamFlix Player Ready!');
+            console.log('тЬЕ StreamFlix Player Ready!');
             return true;
         } catch (error) {
-            console.error('❌ Player initialization failed:', error);
+            console.error('тЭМ Player initialization failed:', error);
             return false;
         }
     } else {
-        console.log('🏠 Not on player page or missing essential elements - skipping player initialization');
+        console.log('ЁЯПа Not on player page or missing essential elements - skipping player initialization');
         return false;
     }
 }
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('📄 DOM Content Loaded');
+    console.log('ЁЯУД DOM Content Loaded');
     initializeStreamFlixPlayer();
 });
